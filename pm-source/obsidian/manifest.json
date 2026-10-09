@@ -1,0 +1,9 @@
+{
+  "id": "physical-model-charts",
+  "name": "Physical Model Charts (ISA-88)",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "Render ISA-88 physical models (enterprise to control module) from text in `physical` code blocks, Mermaid-style.",
+  "author": "ACRO",
+  "isDesktopOnly": false
+}

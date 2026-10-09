@@ -1,0 +1,90 @@
+.pm-container {
+  display: flex;
+  justify-content: safe center;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+
+.pm-svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* containment connectors */
+.pm-line {
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+}
+
+/* entity boxes */
+.pm-box {
+  fill: var(--background-primary);
+  stroke: none;
+}
+.pm-header {
+  fill: var(--interactive-accent);
+  fill-opacity: 0.14;
+  stroke: none;
+}
+.pm-header-rule {
+  stroke: var(--interactive-accent);
+  stroke-opacity: 0.45;
+  stroke-width: 1;
+}
+.pm-border {
+  fill: none;
+  stroke: var(--interactive-accent);
+  stroke-width: 1.5;
+}
+
+/* enterprise / site / area sit outside the equipment entity model: dashed */
+.pm-outer .pm-border {
+  stroke: var(--text-muted);
+  stroke-dasharray: 6 4;
+}
+.pm-outer .pm-header {
+  fill: var(--text-muted);
+  fill-opacity: 0.1;
+}
+.pm-outer .pm-header-rule {
+  stroke: var(--text-muted);
+}
+.pm-outer .pm-kind {
+  fill: var(--text-muted);
+}
+
+/* text */
+.pm-kind {
+  fill: var(--interactive-accent);
+  font-weight: 700;
+}
+.pm-id {
+  fill: var(--text-muted);
+  font-weight: 600;
+}
+.pm-label {
+  fill: var(--text-normal);
+  font-weight: 600;
+}
+.pm-meta {
+  fill: var(--interactive-accent);
+}
+.pm-note {
+  fill: var(--text-muted);
+  font-style: italic;
+}
+.pm-title {
+  fill: var(--text-normal);
+  font-weight: 700;
+}
+
+/* errors */
+.pm-error {
+  color: var(--text-error);
+  background: var(--background-secondary);
+  border-left: 3px solid var(--text-error);
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+}

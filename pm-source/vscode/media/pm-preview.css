@@ -1,0 +1,94 @@
+/* Physical Model Charts — VS Code Markdown-preview theming.
+   Mirrors the Obsidian stylesheet but maps onto VS Code theme variables so
+   models follow the active color theme (light/dark/high-contrast). */
+
+.pm-container {
+  display: flex;
+  justify-content: safe center;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+
+.pm-svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* containment connectors */
+.pm-line {
+  stroke: var(--vscode-descriptionForeground);
+  stroke-width: 1.5;
+}
+
+/* entity boxes */
+.pm-box {
+  fill: var(--vscode-editor-background);
+  stroke: none;
+}
+.pm-header {
+  fill: var(--vscode-textLink-foreground);
+  fill-opacity: 0.14;
+  stroke: none;
+}
+.pm-header-rule {
+  stroke: var(--vscode-textLink-foreground);
+  stroke-opacity: 0.45;
+  stroke-width: 1;
+}
+.pm-border {
+  fill: none;
+  stroke: var(--vscode-textLink-foreground);
+  stroke-width: 1.5;
+}
+
+/* enterprise / site / area sit outside the equipment entity model: dashed */
+.pm-outer .pm-border {
+  stroke: var(--vscode-descriptionForeground);
+  stroke-dasharray: 6 4;
+}
+.pm-outer .pm-header {
+  fill: var(--vscode-descriptionForeground);
+  fill-opacity: 0.1;
+}
+.pm-outer .pm-header-rule {
+  stroke: var(--vscode-descriptionForeground);
+}
+.pm-outer .pm-kind {
+  fill: var(--vscode-descriptionForeground);
+}
+
+/* text */
+.pm-kind {
+  fill: var(--vscode-textLink-foreground);
+  font-weight: 700;
+}
+.pm-id {
+  fill: var(--vscode-descriptionForeground);
+  font-weight: 600;
+}
+.pm-label {
+  fill: var(--vscode-editor-foreground);
+  font-weight: 600;
+}
+.pm-meta {
+  fill: var(--vscode-textLink-foreground);
+}
+.pm-note {
+  fill: var(--vscode-descriptionForeground);
+  font-style: italic;
+}
+.pm-title {
+  fill: var(--vscode-editor-foreground);
+  font-weight: 700;
+}
+
+/* errors */
+.pm-error {
+  color: var(--vscode-errorForeground);
+  background: var(--vscode-editorWidget-background);
+  border-left: 3px solid var(--vscode-errorForeground);
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+}
