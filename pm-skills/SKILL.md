@@ -1,6 +1,6 @@
 ---
 name: isa88-physical-model
-description: Write ISA-88 (S88) physical model diagrams as `physical` code blocks for the Physical Model Charts renderers (Obsidian plugin, VS Code Markdown preview, Fumadocs component). Use this whenever the user wants to draw, write or edit an equipment hierarchy, a plant/line/machine breakdown, a physical model, or an equipment entity model, or asks how to structure enterprise / site / area / process cell / unit / machine / equipment module / control module, common resources, or trains — even if they don't say "physical model" explicitly. Also use it whenever a fenced ```physical code block appears or should be produced.
+description: Write ISA-88 (S88) physical model diagrams as `physical` code blocks for the Physical Model Charts renderers (Obsidian plugin, VS Code Markdown preview, Fumadocs component). Use this whenever the user wants to draw, write or edit an equipment hierarchy, a plant/line/machine breakdown, a physical model, or an equipment entity model, or asks how to structure enterprise / site / area / process cell / unit / machine / equipment module / control module, common resources, or trains — even if they don't say "physical model" explicitly. Also covers splitting large machines or cells with many sensors, valves, robots and safety devices into an overview plus per-unit diagrams. Also use it whenever a fenced ```physical code block appears or should be produced.
 ---
 
 # ISA-88 Physical Model Charts
@@ -98,6 +98,55 @@ complete or standard-compliant model:
   levels above it.
 - **Deep or wide model**: use `direction LR` for 6–7 levels or very long labels. TB
   stacks CMs automatically, so it stays narrow for typical machines.
+- **Robots, safety and shared instruments**: a robot is an `em` holding the robot
+  controller, vision and gripper CMs. A gripper (valves plus a vacuum or pressure
+  switch) is a compound CM. Guard doors, light curtains and E-stops stop the whole
+  machine, so they are CMs **directly under the unit**, with door switches grouped in
+  one compound CM. Instruments used by several EMs (tank level, tank pressure) are also
+  unit-level CMs.
+
+## Large machines and cells
+
+A whole cell with every device in one diagram becomes unreadable. With 5 units, 21 EMs
+and 158 CMs it is 7,600 px wide, and collapsing devices only brings that down to
+5,800 px. **The width comes from EMs sitting side by side, not from the device count**,
+so split the model into several diagrams. Split when it has more than ~40 CMs or more
+than two units with CMs, and write one `physical` block per diagram:
+
+1. **Overview**: the `cell`, its direct children, and **each unit's direct children
+   (EMs and unit-level CMs) with nothing below them**. Put `uses` on the units here.
+   Stopping at one fixed depth keeps it narrow, because childless entities stack.
+2. **Cell resources**: only if cell-level EMs or CMs have children (CIP skid,
+   utilities). A `cell` holding them with their CMs and no units. Leave out `strict`,
+   which requires a unit.
+3. **One diagram per unit**: start at `machine` (or `unit`) with the **same id and
+   label as in the overview**. `uses` can't point outside the diagram, so write
+   `note "Uses cell resources: CIP, AIR"` instead.
+
+Keep each diagram readable:
+
+- **Collapse indexed arrays of identical devices** into one CM, label it with the count,
+  and put the tag range in a note: `cm FV201 "Fill Valves ×24"` +
+  `note "FV201_01 … FV201_24"`. In the PLC this is one CM type with N instances. The
+  per-instance list belongs in the IO list. Keep devices separate when each one has its
+  own role: safety doors (reviewers trace them by tag) and valves with different duties.
+- **Keep an EM's children all leaves** where it is correct to do so. TB stacks children
+  only when none of them has children, and one compound CM spreads the whole EM
+  sideways. Several loose unit-level instruments can go in one compound CM
+  (`cm U1_TNK "Tank Instruments"`) for the same reason.
+- **Don't write counts in notes** ("48 CMs"). They are typed by hand, stop matching the
+  model, and nothing checks them.
+
+Check the set as a whole before answering:
+
+- [ ] Each unit diagram's top row equals that unit's children in the overview (same
+      ids, same order)
+- [ ] Every device appears in exactly one diagram. Cell-level CMs are easy to drop, so
+      check them.
+- [ ] Ids are unique across **all** diagrams, not only within each one
+- [ ] Unit ids and labels are identical in the overview and in the unit diagram
+
+See example 5 in [references/examples.md](references/examples.md).
 
 ## Output checklist
 
