@@ -83,7 +83,7 @@ async function buildVscode() {
   mkdirSync(join(out, "dist"), { recursive: true });
   mkdirSync(join(out, "media"), { recursive: true });
 
-  await esbuild.build({
+  const opts = {
     entryPoints: ["pm-source/vscode/src/extension.ts"],
     bundle: true,
     external: ["vscode"],
@@ -94,7 +94,15 @@ async function buildVscode() {
     sourcemap: watch ? "inline" : false,
     logLevel: "info",
     outfile: join(out, "dist/extension.js"),
-  });
+  };
+
+  // watch mode backs the F5 debug flow (.vscode/launch.json at the repo root);
+  // its "[watch] build finished" log line is what the background task waits for
+  if (watch) {
+    await (await esbuild.context(opts)).watch();
+  } else {
+    await esbuild.build(opts);
+  }
 
   // self-contained extension folder, ready for `vsce package`
   copyFileSync("pm-source/vscode/package.json", join(out, "package.json"));
@@ -134,7 +142,7 @@ async function buildVscode() {
   );
   // keep dev-only files out of the packaged VSIX (also silences vsce's warning)
   writeFileSync(join(out, ".vscodeignore"), [".vscode/**", "**/*.map", ""].join("\n"));
-  console.log("vscode: built -> output/vscode");
+  console.log(watch ? "vscode: watching -> output/vscode" : "vscode: built -> output/vscode");
 }
 
 // Fumadocs adapter — bundled to compiled ESM with @pm/core inlined and React
