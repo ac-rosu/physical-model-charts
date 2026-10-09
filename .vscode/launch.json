@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run VS Code extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/output/vscode", "${workspaceFolder}"],
+      "outFiles": ["${workspaceFolder}/output/vscode/dist/**/*.js"],
+      "preLaunchTask": "npm: dev:vscode"
+    },
+    {
+      "name": "Attach to Extension Host (port 9229)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "outFiles": ["${workspaceFolder}/output/vscode/dist/**/*.js"]
+    }
+  ]
+}
