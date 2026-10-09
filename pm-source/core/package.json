@@ -1,0 +1,10 @@
+{
+  "name": "@pm/core",
+  "version": "1.0.0",
+  "description": "Framework-agnostic ISA-88 physical model parser, layout engine, and SVG renderer.",
+  "private": true,
+  "license": "MIT",
+  "author": "ACRO",
+  "main": "src/index.ts",
+  "types": "src/index.ts"
+}

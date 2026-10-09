@@ -1,0 +1,12 @@
+{
+  "name": "pm-obsidian",
+  "version": "1.0.0",
+  "description": "Obsidian plugin adapter for Physical Model Charts (consumes @pm/core).",
+  "private": true,
+  "license": "MIT",
+  "author": "ACRO",
+  "main": "main.js",
+  "dependencies": {
+    "@pm/core": "*"
+  }
+}

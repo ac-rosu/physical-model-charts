@@ -1,0 +1,25 @@
+{
+  "name": "@pm/fumadocs",
+  "version": "1.0.0",
+  "description": "Fumadocs (Next.js + MDX) adapter for Physical Model Charts (consumes @pm/core).",
+  "private": true,
+  "license": "MIT",
+  "author": "ACRO",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./remark": "./src/remark.ts",
+    "./styles.css": "./styles.css"
+  },
+  "dependencies": {
+    "@pm/core": "*"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0"
+  }
+}
