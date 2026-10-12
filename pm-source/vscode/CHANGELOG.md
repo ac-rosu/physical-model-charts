@@ -14,3 +14,5 @@
   mode for the completeness rules.
 - Top-down (with compact leaf stacking) or left-to-right layouts.
 - Models follow the active VS Code color theme.
+- Works in Restricted Mode (untrusted workspaces): the extension only renders model
+  text and runs no workspace code.

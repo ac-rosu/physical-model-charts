@@ -45,23 +45,24 @@ npm run build:vscode     # -> output/vscode/
 
 ```bash
 cd output/vscode
-npx @vscode/vsce package --allow-missing-repository   # -> physical-model-charts-<v>.vsix
+npx @vscode/vsce package --no-dependencies   # -> physical-model-charts-<v>.vsix
 code --install-extension physical-model-charts-1.0.0.vsix
 ```
 
 ## Releasing a new version
 
-1. Bump `version` in [package.json](package.json) and add a matching entry to
+1. Bump `version` in [package.json](package.json) by hand and add a matching entry to
    [CHANGELOG.md](CHANGELOG.md).
 2. Run `npm run build:vscode` from the repository root.
-3. Package and/or publish from `output/vscode/`:
+3. Package from `output/vscode/`:
    ```bash
    cd output/vscode
-   npx @vscode/vsce package --allow-missing-repository
-   npx @vscode/vsce publish -p <PAT> --allow-missing-repository
+   npx @vscode/vsce package --no-dependencies
    ```
-   Publishing requires the `acro` publisher and a PAT with the Marketplace **Manage**
-   scope.
+4. Upload the `.vsix` at <https://marketplace.visualstudio.com/manage> (publisher `acro`).
+
+See [Releasing a new version](../../README.md#vs-code) in the root README for the
+command-line alternative and the December 2026 PAT retirement.
 
 To regenerate the icon after editing [media/icon.svg](media/icon.svg), run `npm run icon`.
 

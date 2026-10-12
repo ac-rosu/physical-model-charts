@@ -114,13 +114,25 @@ it, rebuild, then ship using the per-target step below.
 
 1. Bump `version` in [pm-source/vscode/package.json](pm-source/vscode/package.json) and
    add a matching entry to [pm-source/vscode/CHANGELOG.md](pm-source/vscode/CHANGELOG.md).
+   Bump it by hand: `vsce publish patch|minor|major` would only bump the build copy in
+   `output/vscode/`, which the next build overwrites.
 2. `npm run build:vscode`.
-3. Package and/or publish from `output/vscode/`:
+3. Package from `output/vscode/` (`--no-dependencies`: the extension is fully bundled into
+   `dist/extension.js`):
    ```bash
    cd output/vscode
-   npx @vscode/vsce package --allow-missing-repository        # -> physical-model-charts-<v>.vsix
-   npx @vscode/vsce publish -p <PAT> --allow-missing-repository   # publish to Marketplace
+   npx @vscode/vsce package --no-dependencies   # -> physical-model-charts-<v>.vsix
    ```
+4. Publish by uploading the `.vsix` at <https://marketplace.visualstudio.com/manage>
+   (publisher `acro`): **New extension → Visual Studio Code** the first time, then
+   **Update** from the extension's **More actions** menu for later versions. Installed
+   copies update automatically. A version number can never be reused.
+
+   Command-line alternative: `vsce login acro`, then
+   `npx @vscode/vsce publish --no-dependencies`. That needs an Azure DevOps PAT
+   (organization **All accessible organizations**, scope **Marketplace › Manage**). Such
+   global PATs are retired on December 1, 2026; after that, command-line publishing needs
+   Microsoft Entra ID (`vsce publish --azure-credential`).
 
 ### Fumadocs
 
