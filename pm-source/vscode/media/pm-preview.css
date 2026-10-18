@@ -71,6 +71,13 @@
 .pm-colored .pm-lvl-cm {
   --pm-level: var(--vscode-charts-orange);
 }
+/* charts.orange is the palest hue on light themes; darken it to match the others
+   (toward maroon, not black, so it stays orange instead of turning brown) */
+@supports (color: color-mix(in srgb, red, red)) {
+  .vscode-light .pm-colored .pm-lvl-cm {
+    --pm-level: color-mix(in srgb, var(--vscode-charts-orange) 70%, maroon);
+  }
+}
 .pm-colored .pm-entity:not(.pm-outer) .pm-border,
 .pm-colored .pm-entity:not(.pm-outer) .pm-header-rule {
   stroke: var(--pm-level);

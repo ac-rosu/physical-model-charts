@@ -67,6 +67,15 @@
 .pm-colored .pm-lvl-cm {
   --pm-level: var(--color-orange);
 }
+/* green and orange are the palest hues on light themes; darken them to match */
+@supports (color: color-mix(in srgb, red, red)) {
+  .theme-light .pm-colored .pm-lvl-em {
+    --pm-level: color-mix(in srgb, var(--color-green) 75%, black);
+  }
+  .theme-light .pm-colored .pm-lvl-cm {
+    --pm-level: color-mix(in srgb, var(--color-orange) 75%, black);
+  }
+}
 .pm-colored .pm-entity:not(.pm-outer) .pm-border,
 .pm-colored .pm-entity:not(.pm-outer) .pm-header-rule {
   stroke: var(--pm-level);
