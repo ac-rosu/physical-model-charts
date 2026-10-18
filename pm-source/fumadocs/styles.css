@@ -59,6 +59,41 @@
   fill: var(--color-fd-muted-foreground);
 }
 
+/* `use-colors`: one hue per equipment level (Fumadocs has no palette tokens) */
+.pm-colored .pm-lvl-cell {
+  --pm-level: #9333ea;
+}
+.pm-colored .pm-lvl-unit {
+  --pm-level: #2563eb;
+}
+.pm-colored .pm-lvl-em {
+  --pm-level: #16a34a;
+}
+.pm-colored .pm-lvl-cm {
+  --pm-level: #ea580c;
+}
+.dark .pm-colored .pm-lvl-cell {
+  --pm-level: #c084fc;
+}
+.dark .pm-colored .pm-lvl-unit {
+  --pm-level: #60a5fa;
+}
+.dark .pm-colored .pm-lvl-em {
+  --pm-level: #4ade80;
+}
+.dark .pm-colored .pm-lvl-cm {
+  --pm-level: #fb923c;
+}
+.pm-colored .pm-entity:not(.pm-outer) .pm-border,
+.pm-colored .pm-entity:not(.pm-outer) .pm-header-rule {
+  stroke: var(--pm-level);
+}
+.pm-colored .pm-entity:not(.pm-outer) .pm-header,
+.pm-colored .pm-entity:not(.pm-outer) .pm-kind,
+.pm-colored .pm-entity:not(.pm-outer) .pm-meta {
+  fill: var(--pm-level);
+}
+
 /* text */
 .pm-kind {
   fill: var(--color-fd-primary);

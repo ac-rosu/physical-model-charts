@@ -20,6 +20,14 @@ test("outer levels get the pm-outer class", () => {
   assert.match(svg, /class="pm-entity pm-lvl-cell"/);
 });
 
+test("use-colors tags the svg with pm-colored", () => {
+  assert.match(renderModelToString(parsePhysical(`unit U`)), /^<svg class="pm-svg"/);
+  assert.match(
+    renderModelToString(parsePhysical(`use-colors\nunit U`)),
+    /^<svg class="pm-svg pm-colored"/
+  );
+});
+
 test("escapes text content (no raw markup injection)", () => {
   const svg = renderModelToString(parsePhysical(`unit "a<b>&c"\n  note "<script>"`));
   assert.ok(!svg.includes("<b>"), "raw tag must not appear");

@@ -50,6 +50,7 @@ in it. `//` and `#` start comments.
 | `train "Label" U1 U2 ...` | A train: units within one process cell. |
 | `direction TB` / `direction LR` | Top-down (default) or left-to-right tree. |
 | `wide` | Don't stack leaf children (TB). |
+| `use-colors` | Color each level: process cell purple, unit blue, EM green, CM orange. |
 | `strict` | Also enforce the ISA-88 completeness rules. |
 
 Flags: `shared`, `exclusive`, `portable` (unit, EM, CM); `recipe-aware`, `generic` (EM).
@@ -64,7 +65,8 @@ error messages.
 All colors come from Obsidian theme variables (`--interactive-accent`, `--text-normal`,
 `--background-primary`, …), so models follow light and dark themes automatically. Each
 entity is a `.pm-entity.pm-lvl-<level>` group, so you can restyle a single level in
-`styles.css`.
+`styles.css`. `use-colors` takes its hues from `--color-purple`, `--color-blue`,
+`--color-green` and `--color-orange`.
 
 ## Releasing a new version
 

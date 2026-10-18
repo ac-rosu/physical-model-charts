@@ -38,6 +38,8 @@ your active color theme.
 - **Trains, ids and notes** are shown on each box.
 - **Two layouts.** Top-down, with leaf modules stacked so large machines stay narrow,
   or left-to-right (`direction LR`).
+- **Level colors.** Add `use-colors` to draw process cells purple, units blue,
+  equipment modules green and control modules orange, from the theme's chart palette.
 - **Theme-aware.** Colors map onto VS Code theme variables (light, dark and
   high-contrast).
 
@@ -54,6 +56,7 @@ your active color theme.
 | Resource use | `uses CIP` |
 | Train | `train "Train A" R1 D1` |
 | Layout | `direction LR`, `wide` |
+| Level colors | `use-colors` |
 | Completeness checks | `strict` |
 
 ## Example — left-to-right

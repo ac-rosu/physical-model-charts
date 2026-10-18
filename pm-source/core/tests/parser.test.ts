@@ -199,6 +199,9 @@ test("directives", () => {
   assert.equal(m.direction, "LR");
   assert.equal(m.compact, false);
   assert.equal(parsePhysical(`direction TD\nunit U`).direction, "TB");
+  assert.equal(m.colors, false);
+  assert.equal(parsePhysical(`use-colors\nunit U`).colors, true);
+  throwsAt(`use-colors on\nunit U`, /'use-colors' takes no arguments/, 1);
   throwsAt(`direction up\nunit U`, /direction must be TB or LR/, 1);
   throwsAt(`physical A\nphysical B\nunit U`, /duplicate 'physical' title/, 2);
 });

@@ -191,6 +191,7 @@ member unit shows `train: Train A` (or `trains: …`).
 | `direction LR` | Left-to-right tree. Good for deep hierarchies. |
 | `wide` | In TB, lay leaf children side by side instead of stacking them. |
 | `strict` | Also enforce the ISA-88 completeness rules (see below). |
+| `use-colors` | Color each equipment level: process cells purple, units blue, equipment modules green, control modules orange. Enterprise, site and area stay muted. |
 
 Directives may appear on any line.
 
@@ -274,6 +275,7 @@ automatically. Override any of these classes in `styles.css`:
 | `.pm-entity` | Group wrapping one entity box |
 | `.pm-lvl-enterprise` … `.pm-lvl-cm` | Per-level group class (`enterprise`, `site`, `area`, `cell`, `unit`, `em`, `cm`) |
 | `.pm-outer` | Added to enterprise, site and area (dashed by default) |
+| `.pm-colored` | Added to the `<svg>` with `use-colors`; each level sets its hue in `--pm-level` |
 | `.pm-box` | Box fill |
 | `.pm-border` | Box outline |
 | `.pm-header` / `.pm-header-rule` | Header band and its divider |

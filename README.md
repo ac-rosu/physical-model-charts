@@ -38,6 +38,10 @@ as in Part 1 Figure 3:
   <img src="assets/pm-example-lr.png" alt="Left-to-right physical model from site Rotterdam down to the control modules of a case packer" width="720">
 </p>
 
+Add `use-colors` to color each equipment level: process cells purple, units blue,
+equipment modules green and control modules orange. The hues come from the host's
+theme palette (Fumadocs uses fixed light and dark values).
+
 The parser enforces the Part 1 containment rules. Levels may be omitted but never
 rearranged, compound EMs and CMs are allowed, the site and process cell may not be
 skipped, and a train stays within one process cell. `strict` adds the completeness

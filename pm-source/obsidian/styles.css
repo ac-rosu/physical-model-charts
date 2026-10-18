@@ -54,6 +54,29 @@
   fill: var(--text-muted);
 }
 
+/* `use-colors`: one hue per equipment level, from the theme's color palette */
+.pm-colored .pm-lvl-cell {
+  --pm-level: var(--color-purple);
+}
+.pm-colored .pm-lvl-unit {
+  --pm-level: var(--color-blue);
+}
+.pm-colored .pm-lvl-em {
+  --pm-level: var(--color-green);
+}
+.pm-colored .pm-lvl-cm {
+  --pm-level: var(--color-orange);
+}
+.pm-colored .pm-entity:not(.pm-outer) .pm-border,
+.pm-colored .pm-entity:not(.pm-outer) .pm-header-rule {
+  stroke: var(--pm-level);
+}
+.pm-colored .pm-entity:not(.pm-outer) .pm-header,
+.pm-colored .pm-entity:not(.pm-outer) .pm-kind,
+.pm-colored .pm-entity:not(.pm-outer) .pm-meta {
+  fill: var(--pm-level);
+}
+
 /* text */
 .pm-kind {
   fill: var(--interactive-accent);

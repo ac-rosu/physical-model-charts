@@ -64,6 +64,8 @@ start, or `//` anywhere outside quotes.
 - `train "Label" U1 U2 ...` declares a train (units within one process cell).
 - `physical <title>` gives an optional title. `direction LR` switches to a left-to-right
   tree, and `wide` disables leaf stacking in TB. `strict` enables the completeness checks.
+  `use-colors` colors each level (cell purple, unit blue, EM green, CM orange). Add it
+  when the user asks for colors.
 
 ## Rules you must follow (the parser rejects violations)
 

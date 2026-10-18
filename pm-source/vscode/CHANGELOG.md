@@ -1,5 +1,12 @@
 # Change Log
 
+## Unreleased
+
+- New `use-colors` directive: colors each equipment level, with process cells purple,
+  units blue, equipment modules green and control modules orange. The hues come from
+  the active theme's chart palette, so they follow light, dark and high-contrast
+  themes. Enterprise, site and area stay muted. Off by default.
+
 ## 1.0.0
 
 - Initial release.

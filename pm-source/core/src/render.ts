@@ -24,7 +24,7 @@ export function renderModel(model: PmModel): SVGElement {
   const L: Layout = layoutModel(model);
 
   const svg = svgEl("svg", {
-    class: "pm-svg",
+    class: model.colors ? "pm-svg pm-colored" : "pm-svg",
     width: L.width,
     height: L.height,
     viewBox: `0 0 ${L.width} ${L.height}`,
