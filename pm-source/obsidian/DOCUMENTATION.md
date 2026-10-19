@@ -192,6 +192,7 @@ member unit shows `train: Train A` (or `trains: …`).
 | `wide` | In TB, lay leaf children side by side instead of stacking them. |
 | `strict` | Also enforce the ISA-88 completeness rules (see below). |
 | `use-colors` | Color each equipment level: process cells purple, units blue, equipment modules green, control modules orange. Enterprise, site and area stay muted. |
+| `uniform-width` | Draw every entity box at the width of the widest box, for a uniform look. Aliases: `uniform`, `uniform width`. |
 
 Directives may appear on any line.
 

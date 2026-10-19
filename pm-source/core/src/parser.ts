@@ -16,7 +16,7 @@
 //   train "Label" U1 U2  a train: a set of units within one process cell
 //
 // Flags: shared | exclusive | portable | recipe-aware | generic
-// Directives: direction TB|LR, wide, strict, use-colors
+// Directives: direction TB|LR, wide, strict, use-colors, uniform-width
 //
 // Rules (ANSI/ISA-88.00.01-2010 Part 1):
 //   - levels may be omitted but never rearranged (§4.4.2.5, §4.4.3.7);
@@ -55,6 +55,7 @@ export interface PmModel {
   compact: boolean; // stack leaf-only children vertically (TB only)
   strict: boolean;
   colors: boolean; // one hue per equipment level (cell, unit, em, cm)
+  uniformWidth: boolean; // every entity box at the width of the widest one
   roots: PmNode[];
   trains: PmTrain[];
 }
@@ -225,6 +226,7 @@ export function parsePhysical(source: string): PmModel {
     compact: true,
     strict: false,
     colors: false,
+    uniformWidth: false,
     roots: [],
     trains: [],
   };
@@ -264,6 +266,14 @@ export function parsePhysical(source: string): PmModel {
       if (kw === "wide") model.compact = false;
       else if (kw === "strict") model.strict = true;
       else model.colors = true;
+      attach = null;
+      continue;
+    }
+    // `uniform-width`, also `uniform` and `uniform width` (as in PFC charts)
+    if (kw === "uniform-width" || kw === "uniform") {
+      if (rest && !(kw === "uniform" && rest.toLowerCase() === "width"))
+        throw new ParseError(`'${kw}' takes no arguments`, n);
+      model.uniformWidth = true;
       attach = null;
       continue;
     }

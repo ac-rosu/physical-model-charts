@@ -40,6 +40,8 @@ your active color theme.
   or left-to-right (`direction LR`).
 - **Level colors.** Add `use-colors` to draw process cells purple, units blue,
   equipment modules green and control modules orange, from the theme's chart palette.
+- **Same-width boxes.** Add `uniform-width` to draw every box at the width of the
+  widest one, for a uniform look.
 - **Theme-aware.** Colors map onto VS Code theme variables (light, dark and
   high-contrast).
 
@@ -57,6 +59,7 @@ your active color theme.
 | Train | `train "Train A" R1 D1` |
 | Layout | `direction LR`, `wide` |
 | Level colors | `use-colors` |
+| Same-width boxes | `uniform-width` (anywhere in the chart) |
 | Completeness checks | `strict` |
 
 ## Example — left-to-right

@@ -40,7 +40,8 @@ as in Part 1 Figure 3:
 
 Add `use-colors` to color each equipment level: process cells purple, units blue,
 equipment modules green and control modules orange. The hues come from the host's
-theme palette (Fumadocs uses fixed light and dark values).
+theme palette (Fumadocs uses fixed light and dark values). Add `uniform-width` (alias
+`uniform`) to draw every box at the width of the widest one, for a uniform look.
 
 The parser enforces the Part 1 containment rules. Levels may be omitted but never
 rearranged, compound EMs and CMs are allowed, the site and process cell may not be

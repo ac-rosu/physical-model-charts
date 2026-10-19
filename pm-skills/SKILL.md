@@ -65,7 +65,8 @@ start, or `//` anywhere outside quotes.
 - `physical <title>` gives an optional title. `direction LR` switches to a left-to-right
   tree, and `wide` disables leaf stacking in TB. `strict` enables the completeness checks.
   `use-colors` colors each level (cell purple, unit blue, EM green, CM orange). Add it
-  when the user asks for colors.
+  when the user asks for colors. `uniform-width` (alias `uniform`) draws every box at
+  the width of the widest one; add it when the user asks for same-size or tidy boxes.
 
 ## Rules you must follow (the parser rejects violations)
 

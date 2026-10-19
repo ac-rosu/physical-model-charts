@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- New `uniform-width` chart directive (alias `uniform`): draws every entity box at the
+  width of the widest one, for a uniform look. Off by default.
+
 ## 1.1.0
 
 - New `use-colors` directive: colors each equipment level, with process cells purple,

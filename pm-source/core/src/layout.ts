@@ -271,6 +271,11 @@ export function layoutModel(model: PmModel): Layout {
   const bd = (b: LBox) => (TB ? b.m.w : b.m.h); // breadth dimension
   const dd = (b: LBox) => (TB ? b.m.h : b.m.w); // depth dimension
 
+  // `uniform-width`: every entity box at the width of the widest one
+  const widest = (node: PmNode): number =>
+    Math.max(measureEntity(node).w, ...node.children.map(widest));
+  const uniformW = model.uniformWidth ? Math.max(0, ...model.roots.map(widest)) : 0;
+
   const build = (node: PmNode, depth: number): LBox => {
     const kids = node.children.map((c) => build(c, depth + 1));
     const stack = TB && model.compact && kids.length >= 2 && kids.every((k) => k.kids.length === 0);
@@ -280,7 +285,7 @@ export function layoutModel(model: PmModel): Layout {
     }
     return {
       node,
-      m: measureEntity(node),
+      m: measureEntity(node, uniformW),
       depth,
       kids,
       stack,

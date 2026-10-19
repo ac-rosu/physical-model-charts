@@ -51,6 +51,7 @@ in it. `//` and `#` start comments.
 | `direction TB` / `direction LR` | Top-down (default) or left-to-right tree. |
 | `wide` | Don't stack leaf children (TB). |
 | `use-colors` | Color each level: process cell purple, unit blue, EM green, CM orange. |
+| `uniform-width` | Draw every box at the width of the widest one, for a uniform look. Alias: `uniform`. |
 | `strict` | Also enforce the ISA-88 completeness rules. |
 
 Flags: `shared`, `exclusive`, `portable` (unit, EM, CM); `recipe-aware`, `generic` (EM).

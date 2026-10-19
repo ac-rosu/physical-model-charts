@@ -202,6 +202,12 @@ test("directives", () => {
   assert.equal(m.colors, false);
   assert.equal(parsePhysical(`use-colors\nunit U`).colors, true);
   throwsAt(`use-colors on\nunit U`, /'use-colors' takes no arguments/, 1);
+  assert.equal(m.uniformWidth, false);
+  assert.equal(parsePhysical(`uniform-width\nunit U`).uniformWidth, true);
+  assert.equal(parsePhysical(`uniform\nunit U`).uniformWidth, true);
+  assert.equal(parsePhysical(`Uniform Width\nunit U`).uniformWidth, true);
+  throwsAt(`uniform-width on\nunit U`, /'uniform-width' takes no arguments/, 1);
+  throwsAt(`uniform height\nunit U`, /'uniform' takes no arguments/, 1);
   throwsAt(`direction up\nunit U`, /direction must be TB or LR/, 1);
   throwsAt(`physical A\nphysical B\nunit U`, /duplicate 'physical' title/, 2);
 });

@@ -69,6 +69,22 @@ for (const [name, prefix] of [
   });
 }
 
+for (const [name, prefix] of [
+  ["TB compact", ""],
+  ["TB wide", "wide\n"],
+  ["LR", "direction LR\n"],
+] as const) {
+  test(`${name}: uniform-width draws every box at the width of the widest one`, () => {
+    const plain = layoutModel(parsePhysical(prefix + MACHINE));
+    const L = layoutModel(parsePhysical("uniform-width\n" + prefix + MACHINE));
+    const widest = Math.max(...plain.boxes.map((b) => b.w));
+    assert.ok(new Set(plain.boxes.map((b) => b.w)).size > 1, "boxes differ without it");
+    for (const b of L.boxes) assert.equal(b.w, widest);
+    assertNoOverlap(L);
+    assertInside(L);
+  });
+}
+
 test("TB: children sit below their parent; LR: to its right", () => {
   const src = `unit U\n  em A\n  em B`;
   const tb = layoutModel(parsePhysical(src));
