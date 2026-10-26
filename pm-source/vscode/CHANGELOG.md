@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.3.1
 
 - Fix: double-clicking the zoom buttons or a scrollbar no longer switches from the
   preview to the editor.
