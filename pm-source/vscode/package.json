@@ -48,6 +48,9 @@
     "markdown.markdownItPlugins": true,
     "markdown.previewStyles": [
       "./media/pm-preview.css"
+    ],
+    "markdown.previewScripts": [
+      "./media/pm-preview.js"
     ]
   },
   "devDependencies": {

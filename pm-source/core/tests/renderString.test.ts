@@ -14,6 +14,13 @@ test("renders a standalone <svg> string with dimensions", () => {
   assert.match(svg, /class="pm-line"/);
 });
 
+test("sets a minimum width of 80% of the natural width", () => {
+  const svg = renderModelToString(parsePhysical(`unit U\n  em E1\n  em E2\n  em E3`));
+  const width = Number(/^<svg [^>]*width="(\d+)"/.exec(svg)![1]);
+  const min = Number(/--pm-min-width: (\d+)px/.exec(svg)![1]);
+  assert.equal(min, Math.round(width * 0.8));
+});
+
 test("outer levels get the pm-outer class", () => {
   const svg = renderModelToString(parsePhysical(`site S\n  cell C`));
   assert.match(svg, /class="pm-entity pm-lvl-site pm-outer"/);

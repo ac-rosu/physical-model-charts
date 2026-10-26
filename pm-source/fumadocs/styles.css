@@ -3,17 +3,32 @@
    tokens so models follow the active docs theme (light/dark). Import once in a
    global stylesheet: `import "@pm/fumadocs/styles.css";` */
 
+/* A model shrinks to fit the width, but not below --pm-min-width (set by the
+   renderer); past that, and past 80% of the viewport height, the container
+   scrolls. Scrollbars only appear when needed. */
 .pm-container {
-  display: flex;
-  justify-content: safe center;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: 80vh;
   padding: 4px 0;
 }
 
 .pm-svg {
   display: block;
+  margin: 0 auto;
   max-width: 100%;
+  min-width: var(--pm-min-width);
   height: auto;
+}
+
+/* print / PDF export can't scroll: fit the page width instead */
+@media print {
+  .pm-container {
+    max-height: none;
+    overflow: visible;
+  }
+  .pm-svg {
+    min-width: 0;
+  }
 }
 
 /* containment connectors */

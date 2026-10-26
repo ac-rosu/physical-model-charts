@@ -96,18 +96,35 @@ async function buildVscode() {
     outfile: join(out, "dist/extension.js"),
   };
 
+  // preview-side script (zoom controls), run inside the Markdown preview webview
+  const previewOpts = {
+    entryPoints: ["pm-source/vscode/src/preview.ts"],
+    bundle: true,
+    platform: "browser",
+    format: "iife",
+    target: "es2020",
+    treeShaking: true,
+    sourcemap: watch ? "inline" : false,
+    logLevel: "info",
+    outfile: join(out, "media/pm-preview.js"),
+  };
+
   // watch mode backs the F5 debug flow (.vscode/launch.json at the repo root);
-  // its "[watch] build finished" log line is what the background task waits for
+  // its "[watch] build finished" log line is what the background task waits for,
+  // so the preview build only logs warnings and errors there and starts first
   if (watch) {
+    await (await esbuild.context({ ...previewOpts, logLevel: "warning" })).watch();
     await (await esbuild.context(opts)).watch();
   } else {
+    await esbuild.build(previewOpts);
     await esbuild.build(opts);
   }
 
   // self-contained extension folder, ready for `vsce package`
   copyFileSync("pm-source/vscode/package.json", join(out, "package.json"));
 
-  // media assets (icon + preview stylesheet); .svg is the icon's source, not shipped
+  // media assets (icon + preview stylesheet; the preview script is built above);
+  // .svg is the icon's source, not shipped
   for (const f of readdirSync("pm-source/vscode/media")) {
     if (f.endsWith(".svg")) continue;
     copyFileSync(join("pm-source/vscode/media", f), join(out, "media", f));

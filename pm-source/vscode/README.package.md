@@ -42,6 +42,10 @@ your active color theme.
   equipment modules green and control modules orange, from the theme's chart palette.
 - **Same-width boxes.** Add `uniform-width` to draw every box at the width of the
   widest one, for a uniform look.
+- **Large models scroll.** A model shrinks to fit the preview, but never below 80% of
+  its natural size; past that, and past 80% of the preview height, it scrolls.
+- **Zoom.** Hover a model for − / Fit / + controls, or hold `Ctrl`/`Cmd` and scroll
+  (or pinch) to zoom around the pointer.
 - **Theme-aware.** Colors map onto VS Code theme variables (light, dark and
   high-contrast).
 

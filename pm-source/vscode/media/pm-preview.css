@@ -2,17 +2,100 @@
    Mirrors the Obsidian stylesheet but maps onto VS Code theme variables so
    models follow the active color theme (light/dark/high-contrast). */
 
+/* A model shrinks to fit the width, but not below --pm-min-width (set by the
+   renderer); past that, and past 80% of the viewport height, the container
+   scrolls. Scrollbars only appear when needed. */
 .pm-container {
-  display: flex;
-  justify-content: safe center;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: 80vh;
   padding: 4px 0;
 }
 
 .pm-svg {
   display: block;
+  margin: 0 auto;
   max-width: 100%;
+  min-width: var(--pm-min-width);
   height: auto;
+}
+
+/* zoom (media/pm-preview.js): the frame holds the scroll box and a toolbar that shows
+   while hovering the model; zooming sets an explicit width */
+.pm-frame {
+  position: relative;
+}
+.pm-zoomed .pm-svg {
+  width: var(--pm-zoom-width);
+  max-width: none;
+  min-width: 0;
+}
+.pm-zoom-bar {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--vscode-editorWidget-background);
+  border: 1px solid var(--vscode-editorWidget-border, transparent);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px var(--vscode-widget-shadow, rgba(0, 0, 0, 0.2));
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.pm-frame:hover .pm-zoom-bar,
+.pm-zoom-bar:focus-within {
+  opacity: 1;
+}
+@media (hover: none) {
+  .pm-zoom-bar {
+    opacity: 1;
+  }
+}
+.pm-zoom-bar button {
+  min-width: 24px;
+  height: 22px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--vscode-foreground);
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.pm-zoom-bar button:hover:not(:disabled) {
+  background: var(--vscode-toolbar-hoverBackground);
+  box-shadow: none;
+}
+.pm-zoom-bar button:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+.pm-zoom-bar button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.pm-zoom-bar .pm-zoom-reset {
+  min-width: 44px;
+}
+
+/* print / PDF export can't scroll or zoom: fit the page width instead */
+@media print {
+  .pm-container {
+    max-height: none;
+    overflow: visible;
+  }
+  .pm-svg,
+  .pm-zoomed .pm-svg {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .pm-zoom-bar {
+    display: none;
+  }
 }
 
 /* containment connectors */

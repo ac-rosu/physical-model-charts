@@ -1,14 +1,97 @@
+/* A model shrinks to fit the width, but not below --pm-min-width (set by the
+   renderer); past that, and past 80% of the viewport height, the container
+   scrolls. Scrollbars only appear when needed. */
 .pm-container {
-  display: flex;
-  justify-content: safe center;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: 80vh;
   padding: 4px 0;
 }
 
 .pm-svg {
   display: block;
+  margin: 0 auto;
   max-width: 100%;
+  min-width: var(--pm-min-width);
   height: auto;
+}
+
+/* zoom (mountZoom in main.ts): the frame holds the scroll box and a toolbar that shows
+   while hovering the model; zooming sets an explicit width */
+.pm-frame {
+  position: relative;
+}
+.pm-zoomed .pm-svg {
+  width: var(--pm-zoom-width);
+  max-width: none;
+  min-width: 0;
+}
+.pm-zoom-bar {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  box-shadow: var(--shadow-s);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.pm-frame:hover .pm-zoom-bar,
+.pm-zoom-bar:focus-within {
+  opacity: 1;
+}
+@media (hover: none) {
+  .pm-zoom-bar {
+    opacity: 1;
+  }
+}
+.pm-zoom-bar button {
+  min-width: 24px;
+  height: 22px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.pm-zoom-bar button:hover:not(:disabled) {
+  background: var(--background-modifier-hover);
+  box-shadow: none;
+}
+.pm-zoom-bar button:focus-visible {
+  outline: 1px solid var(--interactive-accent);
+  outline-offset: -1px;
+}
+.pm-zoom-bar button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.pm-zoom-bar .pm-zoom-reset {
+  min-width: 44px;
+}
+
+/* print / PDF export can't scroll or zoom: fit the page width instead */
+@media print {
+  .pm-container {
+    max-height: none;
+    overflow: visible;
+  }
+  .pm-svg,
+  .pm-zoomed .pm-svg {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .pm-zoom-bar {
+    display: none;
+  }
 }
 
 /* containment connectors */

@@ -21,6 +21,9 @@ cell PC1 "Filling Line 1"
 ```
 ````
 
+Large models scroll instead of shrinking past readability. Hover a model for zoom
+controls, or hold `Ctrl`/`Cmd` and scroll to zoom.
+
 ## Install
 
 Build with `npm run build:obsidian` (from the repo root), then copy the three generated

@@ -5,6 +5,9 @@ import { layoutModel, Layout } from "./layout";
 
 const SVGNS = "http://www.w3.org/2000/svg";
 const RADIUS = 4;
+// hosts shrink a model to fit, but never below this share of its natural size
+// (keeps the 10px header text at 8px or more); past it, the container scrolls
+const MIN_SCALE = 0.8;
 
 function svgEl(name: string, attrs: Record<string, string | number>): SVGElement {
   const e = document.createElementNS(SVGNS, name);
@@ -29,6 +32,8 @@ export function renderModel(model: PmModel): SVGElement {
     height: L.height,
     viewBox: `0 0 ${L.width} ${L.height}`,
     xmlns: SVGNS,
+    // a custom property, not a declaration: the host stylesheets decide how to use it
+    style: `--pm-min-width: ${Math.round(L.width * MIN_SCALE)}px`,
   });
 
   if (L.title) {

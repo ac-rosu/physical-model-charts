@@ -1,13 +1,15 @@
 import { Plugin } from "obsidian";
-import { parsePhysical, ParseError, renderModel } from "@pm/core";
+import { parsePhysical, ParseError, renderModel, mountZoom } from "@pm/core";
 
 export default class PhysicalModelChartsPlugin extends Plugin {
   async onload() {
     this.registerMarkdownCodeBlockProcessor("physical", (source, el) => {
       el.empty();
-      el.addClass("pm-container");
       try {
-        el.appendChild(renderModel(parsePhysical(source)));
+        const svg = renderModel(parsePhysical(source));
+        el.addClass("pm-frame");
+        el.createDiv({ cls: "pm-container" }).appendChild(svg);
+        mountZoom(el);
       } catch (e) {
         const pre = el.createEl("pre", { cls: "pm-error" });
         if (e instanceof ParseError) {

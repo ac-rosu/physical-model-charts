@@ -28,6 +28,10 @@ theme.
 - Theming is contributed via `markdown.previewStyles`
   ([media/pm-preview.css](media/pm-preview.css)), which maps the model classes onto
   `--vscode-*` theme variables.
+- Zoom is a preview script contributed via `markdown.previewScripts`
+  ([src/preview.ts](src/preview.ts), bundled to `media/pm-preview.js`). It runs
+  `mountZoom` from `@pm/core` on every `.pm-frame`, and again after each preview update
+  (the preview diffs new HTML into the page, which drops the toolbar).
 - No runtime dependencies: `@pm/core` is bundled into `dist/extension.js`.
 
 ## Build & package

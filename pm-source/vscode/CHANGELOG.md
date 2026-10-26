@@ -1,5 +1,14 @@
 # Change Log
 
+## Unreleased
+
+- Large models stay readable: a model shrinks to fit the preview, but never below 80%
+  of its natural size. Past that it scrolls sideways, and models taller than 80% of
+  the preview height scroll vertically. Scrollbars only appear when needed.
+- Zoom each model: hover it for − / Fit / + controls, or hold `Ctrl`/`Cmd` and scroll
+  (or pinch on a trackpad) to zoom around the pointer, from 25% to 300%. A model keeps
+  its zoom while you edit the document.
+
 ## 1.2.0
 
 - New `uniform-width` chart directive (alias `uniform`): draws every entity box at the

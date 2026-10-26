@@ -3,7 +3,8 @@
 // VS Code loads this module for the built-in Markdown preview and calls
 // `extendMarkdownIt`. We add a fence rule that turns ```physical code blocks into
 // inline SVG using the shared @pm/core engine. All theming comes from
-// media/pm-preview.css (contributed via markdown.previewStyles).
+// media/pm-preview.css (contributed via markdown.previewStyles); zoom comes from
+// src/preview.ts, bundled to media/pm-preview.js (markdown.previewScripts).
 
 import { parsePhysical, ParseError, renderModelToString } from "@pm/core";
 
@@ -35,7 +36,8 @@ export function extendMarkdownIt(md: MarkdownItLike): MarkdownItLike {
     if (lang === "physical") {
       try {
         const svg = renderModelToString(parsePhysical(tokens[idx].content));
-        return `<div class="pm-container">${svg}</div>`;
+        // media/pm-preview.js adds the zoom controls to each .pm-frame
+        return `<div class="pm-frame"><div class="pm-container">${svg}</div></div>`;
       } catch (e) {
         const msg =
           e instanceof ParseError && e.line > 0

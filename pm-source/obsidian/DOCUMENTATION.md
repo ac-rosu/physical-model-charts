@@ -240,6 +240,15 @@ Boxes size to their text, clamped to a maximum width; longer labels and notes wr
 header shows the level name on the left and the id on the right. The id is hidden when
 it equals the label.
 
+A model shrinks to fit the note width, but never below 80% of its natural size, so text
+stays readable. Past that it scrolls horizontally, and a model taller than 80% of the
+window scrolls vertically. Scrollbars only appear when needed. PDF export can't scroll,
+so there models shrink to fit the page instead.
+
+To zoom a model, hover it and use the − / Fit / + controls in its bottom-right corner,
+or hold `Ctrl`/`Cmd` and scroll (or pinch on a trackpad) to zoom around the pointer.
+Zoom runs from 25% to 300% of the natural size; **Fit** returns to the default.
+
 ---
 
 ## Validation & error messages
@@ -286,6 +295,9 @@ automatically. Override any of these classes in `styles.css`:
 | `.pm-note` | Note text |
 | `.pm-line` | Containment connectors |
 | `.pm-title` | Model title |
+| `.pm-frame` | The code block element; holds the scroll box and the zoom toolbar |
+| `.pm-container` | Scrollable block around the `<svg>` (`max-height: 80vh`) |
+| `.pm-zoom-bar` | Zoom toolbar (− / Fit / +), shown while hovering the model |
 
 For example, to highlight units:
 
@@ -317,6 +329,7 @@ Source layout (shared core + Obsidian adapter):
 - `pm-source/core/src/layout.ts`: deterministic tree layout (no external layout library)
 - `pm-source/core/src/render.ts`: layout → themed SVG
 - `pm-source/core/src/renderString.ts`: the same renderer, emitting an SVG string without a DOM
+- `pm-source/core/src/zoom.ts`: zoom toolbar and `Ctrl`/`Cmd` + wheel zoom for a rendered model
 - `pm-source/obsidian/src/main.ts`: `registerMarkdownCodeBlockProcessor("physical", …)`
 
 ---
