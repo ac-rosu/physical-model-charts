@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.3.0
 
 - Large models stay readable: a model shrinks to fit the preview, but never below 80%
   of its natural size. Past that it scrolls sideways, and models taller than 80% of
