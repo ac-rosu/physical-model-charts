@@ -56,6 +56,9 @@ function toolbar(): HTMLElement {
     button("reset", "Fit", "Reset zoom to fit"),
     button("in", "+", "Zoom in")
   );
+  // clicks still bubble to the frame's handler; only these are kept from the host
+  bar.addEventListener("mousedown", stopPress);
+  bar.addEventListener("dblclick", stopPress);
   return bar;
 }
 
@@ -122,6 +125,19 @@ function onWheel(this: HTMLElement, e: WheelEvent): void {
   zoomTo(this, currentScale(this) * Math.exp(-dy / 100), e.clientX, e.clientY);
 }
 
+// Hosts act on presses inside a rendered model: Obsidian's Live Preview opens the
+// block's source on mousedown, VS Code's preview jumps to the editor on double-click.
+// Presses on the toolbar, or on a scrollbar (whose target is the scroll box itself),
+// are zoom and scroll gestures, so keep them from reaching the host. Stopped below
+// the frame, since the frame may be the host's own element.
+function stopPress(e: MouseEvent): void {
+  e.stopPropagation();
+}
+
+function stopScrollbarPress(e: MouseEvent): void {
+  if (e.target === e.currentTarget) e.stopPropagation();
+}
+
 /** Add zoom controls to a .pm-frame (safe to call again after a re-render). */
 export function mountZoom(frame: HTMLElement): void {
   const p = parts(frame);
@@ -134,6 +150,9 @@ export function mountZoom(frame: HTMLElement): void {
     frame.addEventListener("click", onClick);
     frame.addEventListener("wheel", onWheel, { passive: false });
   }
+  // re-adding the same listener is a no-op, so this is safe on every mount
+  for (const type of ["mousedown", "dblclick"] as const)
+    p.box.addEventListener(type, stopScrollbarPress);
   if (!frame.querySelector(".pm-zoom-bar")) frame.appendChild(toolbar());
   apply(frame, p.svg, state);
 }

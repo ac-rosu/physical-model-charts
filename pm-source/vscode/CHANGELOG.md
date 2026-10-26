@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+- Fix: double-clicking the zoom buttons or a scrollbar no longer switches from the
+  preview to the editor.
+
 ## 1.3.0
 
 - Large models stay readable: a model shrinks to fit the preview, but never below 80%
